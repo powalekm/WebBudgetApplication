@@ -1,3 +1,78 @@
+
 body {
-    background-color: red;
+    background-color: EEF5FF;
+    height: 100vh;
 }
+
+.background-image {
+    height: 500px;
+    background-image: url("./images/YNAB.-1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*Navbar */
+#navbarNav{
+    overflow: hidden;
+    transition: height 200ms;
+}
+
+.navbar {
+    background-color: #526D82;  
+}
+
+.navbar-brand {
+    color: black;
+}
+
+.nav-link {
+    color: #303841;
+}
+
+/*Navbar button*/
+.navbar-toggler,
+.navbar-toggler:hover,
+.navbar-toggler:active,
+.navbar-toggler:visited,
+.navbar-toggler:link {
+    outline-color: #303841;
+    outline-style: none;
+    padding: 1rem;
+    border-style: none;
+}
+
+#nav-line-1,
+#nav-line-2 {
+    width: 30px;
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    margin: 3px 0;
+    transition: 0.2s;
+}
+
+.animation-left {
+    -webkit-transform: rotate(-45deg) translate(0px, 0px);
+    transform: rotate(-45deg) translate(-2px, 2px);
+}
+
+.animation-right {
+    -webkit-transform: rotate(45deg) translate(0px, 0px);
+    transform: rotate(45deg) translate(-2px, -2px);
+}
+
+.hr-text {
+    display: flex;
+    flex-direction: row;
+  }
+.hr-text:before, .hr-text:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid;
+    margin: auto;
+  }
+.hr-text:before {
+    margin-right: 1rem;
+  }
+.hr-text:after {
+    margin-left: 1rem;
+  }
