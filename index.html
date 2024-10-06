@@ -20,7 +20,7 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-light border-bottom"">
       <div class=" container-fluid">
-      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="./index.html">Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
         <div id="nav-line-1"></div>
@@ -37,16 +37,17 @@
               onclick="displayModal('register')">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Expenses</a>
+            <a class="nav-link" href="./expenses.html">Expenses</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Balance</a>
+            <a class="nav-link" href="./balance.html">Balance</a>
           </li>
         </ul>
       </div>
       </div>
     </nav>
   </header>
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -69,6 +70,7 @@
             </div>
           </div>
           <div class="tab-content py-1 mt-2">
+            
             <!-- Login -->
             <div class="tab-pane active" id="pill-loginpanel" role="tabpanel" aria-labelledby="pill-login">
               <div class="modal-body p-5 pt-3">
@@ -95,16 +97,10 @@
                     </div>
                   </div>
                   <span class="hr-text mb-4 ">or</span>
-                  <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit"><svg class="bi me-1"
-                      width="16" height="16">
-                      <use xlink:href="#gmail"></use>
-                    </svg>Sign up with Gmail</button>
-                  <button class="w-100 py-2 mb-0 btn btn-outline-primary rounded-3" type="submit"><svg class="bi me-1"
-                      width="16" height="16">
-                      <use xlink:href="#facebook"></use>
-                    </svg>
-                    Sign up with Facebook
-                  </button>
+                  <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+                    <img class="icon pe-2" src="./icons/icons8-gmail.svg" alt="Gmail icon"><use xlink:href="#gmail"></use>Register with Gmail</button>
+                  <button class="w-100 py-2 mb-0 btn btn-outline-primary rounded-3" type="submit">
+                    <img class="icon pe-2" src="./icons/icons8-facebook.svg" alt="Facebook icon"><use xlink:href="#facebook"></use>Register up with Facebook</button>
                 </form>
               </div>
             </div>
@@ -141,13 +137,9 @@
                     </div>
                     <span class="hr-text mb-4 ">or</span>
                     <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-                      <svg class="bi me-1" width="16" height="16">
-                        <use xlink:href="#gmail"></use>
-                      </svg>Register with Gmail</button>
-                    <button class="w-100 py-2 mb-0 btn btn-outline-primary rounded-3" type="submit"><svg class="bi me-1"
-                        width="16" height="16">
-                        <use xlink:href="#facebook"></use>
-                      </svg>Register up with Facebook</button>
+                      <img class="icon pe-2" src="./icons/icons8-gmail.svg" alt="Gmail icon"><use xlink:href="#gmail"></use>Register with Gmail</button>
+                    <button class="w-100 py-2 mb-0 btn btn-outline-primary rounded-3" type="submit">
+                      <img class="icon pe-2" src="./icons/icons8-facebook.svg" alt="Facebook icon"><use xlink:href="#facebook"></use>Register up with Facebook</button>
                   </form>
                 </div>
             </div>
@@ -163,11 +155,10 @@
       <div class="first-section-bg-image">
         <div class="d-flex flex-column justify-content-center height-100">
           <div id="header" class="px-5 py-4 ">
-            <h1 class="pb-4">Interested in control of your expenses?</h1>
+            <h1 class="pb-4">Control your expenses!</h1>
             <p class="lead">Start tracking your budget and control your financial flow with great balance!</p>
             <button type="button" class="btn btn-lg btn-outline-success" data-bs-toggle="modal"
               data-bs-target="#exampleModal" onclick="displayModal('signIn')">Sign In Today</button>
-
           </div>
         </div>
     </section>
@@ -184,7 +175,7 @@
           <p class="lead">Start thinking about <span class="text-highlighted">your future now!</span></p>
         </div>
         <div class="col-lg-6 order-lg-1 text-center">
-          <img class="img-fluid rounded" alt="Jar with pennies" src="./images/Save.jpg">
+          <img class="section-img img-fluid rounded" alt="Jar with pennies" src="./images/Save.jpg">
         </div>
       </div>
     </section>
@@ -200,7 +191,7 @@
             make <span class="text-highlighted">your dreams!</span></p>
         </div>
         <div class="col-lg-6 order-lg-2 text-center">
-          <img class="img-fluid rounded" alt="Happy woman in journey" src="./images/Traveling.jpg">
+          <img class="section-img img-fluid rounded" alt="Happy woman in journey" src="./images/Traveling.jpg">
         </div>
       </div>
     </section>
@@ -212,10 +203,11 @@
           <h2 class="pb-3">Monitoring your progress</h2>
           <p class="lead">Regular analysis of expenses allows you to track whether savings or cost control activities
             are bringing results.</p>
-          <p class="lead">Are you ready to start your Journey with <span class="text-highlighted">expense analysis?</span></p>
+          <p class="lead">Are you ready to start your Journey with <span class="text-highlighted">expense
+              analysis?</span></p>
         </div>
         <div class="col-lg-6 order-lg-1 text-center">
-          <img class="img-fluid rounded" alt="Luggage on the platform before the journey" src="./images/Traveling2.jpg">
+          <img class="section-img img-fluid rounded" alt="Luggage on the platform before the journey" src="./images/Traveling2.jpg">
         </div>
       </div>
     </section>
@@ -223,11 +215,11 @@
   </main>
 
   <!--  Footer-->
-  <footer class="bg-light py-3 my-4 border-top">
+  <footer class="bg-light py-3 my-4 border">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contact</a></li>
+      <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="./about.html" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="./contact.html" class="nav-link px-2 text-body-secondary">Contact</a></li>
     </ul>
     <p class="text-center text-body-secondary">Copyright 2024 © Budget Tracking Application.</p>
   </footer>
