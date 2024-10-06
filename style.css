@@ -1,24 +1,67 @@
-
-body {
-    background-color: EEF5FF;
-    height: 100vh;
+body,
+html {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
-.background-image {
-    height: 500px;
-    background-image: url("./images/YNAB.-1.jpg");
-    background-position: center;
+img {
+    max-height: 500px;
+    width: auto;
+    border-radius: 1rem;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+    box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+}
+
+.text-muted {
+    color: #63d417;
+    font-weight: 400;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+#header {
+    margin: auto;
+    width: 40%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;    
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+    box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
+}
+
+.first-section {
+    text-align: center;
+    height: 60vh
+}
+
+.first-section-bg-image {
+    height: 60vh;
+    background-size: cover;
+    background-image: url('./images/Background_logo1.png');
     background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.first-section h1 {
+    font-size: 2rem;
+}
+
+.first-section p {
+    font-size: 1.4rem;
+}
+
+.lead {
+    color: black;
 }
 
 /*Navbar */
-#navbarNav{
+#navbarNav {
     overflow: hidden;
     transition: height 200ms;
-}
-
-.navbar {
-    background-color: #526D82;  
 }
 
 .navbar-brand {
@@ -63,16 +106,42 @@ body {
 .hr-text {
     display: flex;
     flex-direction: row;
-  }
-.hr-text:before, .hr-text:after{
+}
+
+.hr-text:before,
+.hr-text:after {
+    color: rgba(128, 128, 128, 0.5);
     content: "";
     flex: 1 1;
     border-bottom: 1px solid;
     margin: auto;
-  }
+}
+
 .hr-text:before {
     margin-right: 1rem;
-  }
+}
+
 .hr-text:after {
     margin-left: 1rem;
-  }
+}
+
+
+@media only screen and (max-width: 1200px) {
+    #header {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    #header {
+        width: 60%;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    #header {
+        width: 80%;
+
+    }
+}
