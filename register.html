@@ -18,8 +18,8 @@
   <!--  Navbar -->
   <header>
     <nav class="navbar navbar-expand-lg bg-light border-bottom">
-      <div class=" container-fluid">
-        <a class="navbar-brand" href="./index.html">Home</a>
+      <div class="container-fluid">
+      <a class="navbar-brand" href="./index.html">Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
         <div id="nav-line-1"></div>
@@ -27,6 +27,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./login.html">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./register.html">Register</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="./expenses.html">Expenses</a>
           </li>
@@ -43,41 +49,47 @@
     <!--  First section-->
     <section class="p-5 px-sm-5">
       <div class="row justify-content-center align-items-center px-sm-5">
-        <div class="col-lg-6 p-3">
+        <div class="col-lg-6 p-3 order-lg-2">
           <form>
-            <h2 class="p-2">Add expense</h2>
+            <h2 class="p-2">Registration Form</h2>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name of expense">
-              <label for="floatingName">Name of expense</label>
+              <input type="text" class="form-control rounded-3" id="floatingName" placeholder="Name">
+              <label for="floatingName">Name</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="floatingDescription" placeholder="Description">
-              <label for="floatingDescription">Description</label>
+              <input type="text" class="form-control rounded-3" id="floatingSurname" placeholder="Surname">
+              <label for="floatingSurname">Surname</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control rounded-3" id="floatingValue" placeholder="Value">
-              <label for="floatingValue">Value</label>
+              <input type="email" class="form-control rounded-3" id="floatingInput"
+                placeholder="name@example.com">
+              <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating mb-3">
-              <select class="form-control" id="floatingType">
-                <option>Food costs</option>
-                <option>Credits, rental, subscription</option>
-                <option>Health, hygiene and cleaning products</option>
-                <option>Clothes</option>
-                <option>Transport</option>
-                <option>Relaxation and hobbies</option>
-                <option>Others</option>
-              </select>
-              <label for="floatingType">Type of expense</label>
+              <input type="password" class="form-control rounded-3" id="floatingPassword"
+                placeholder="Password">
+              <label for="floatingPassword">Password</label>
             </div>
-            <div class="form-floating mb-3">
-              <input type="date" class="form-control rounded-3" id="floatingDate" placeholder="asd">
-              <label for="floatingDate">Date</label>
+            <button class="w-100 mb-4 btn btn-lg rounded-3 btn-primary" type="submit">Register</button>
+            
+            <div class="form-check d-flex justify-content-center mb-4">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example32" />
+              <label class="form-check-label" for="form2Example32">
+                I agree all statements in <a href="#!">Terms of service</a>
+              </label>
             </div>
-            <button class="w-100 mb-4 btn btn-lg rounded-3 btn-primary" type="submit">Submit</button>
+            <span class="hr-text mb-4 ">or</span>
+            <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+              <img class="icon pe-2" src="./icons/icons8-gmail.svg" alt="Gmail icon">
+              <use xlink:href="#gmail"></use>Register with Gmail
+            </button>
+            <button class="w-100 py-2 mb-0 btn btn-outline-primary rounded-3" type="submit">
+              <img class="icon pe-2" src="./icons/icons8-facebook.svg" alt="Facebook icon">
+              <use xlink:href="#facebook"></use>Register up with Facebook
+            </button>
           </form>
         </div>
-        <div class="d-none d-lg-block col-lg-6 text-center p-3">
+        <div class="d-none d-lg-block col-lg-6 text-center p-3 order-lg-1">
           <img class="section-img img-fluid rounded" alt="Happy woman in journey" src="./images/Expense.jpeg">
         </div>
       </div>

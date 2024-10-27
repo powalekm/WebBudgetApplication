@@ -28,9 +28,9 @@ body, html {
 
 #header {
     margin: auto;
-    width: 40%;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 1rem;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.5rem;
     -webkit-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
     -moz-box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
     box-shadow: 2px 2px 5px 0px rgba(66, 68, 90, 1);
@@ -38,11 +38,11 @@ body, html {
 
 .first-section {
     text-align: center;
-    height: 60vh
+    height: 85vh
 }
 
 .first-section-bg-image {
-    height: 60vh;
+    height: 85vh;
     background-size: cover;
     background-image: url('./images/Background_logo1.png');
     background-repeat: no-repeat;
@@ -124,6 +124,12 @@ body, html {
     margin-left: 1rem;
 }
 
+.site-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+ }
+
 
 @media only screen and (max-width: 1200px) {
     #header {
@@ -145,5 +151,12 @@ body, html {
 
     .first-section h1 {
         font-size: 1.6rem;
+    }
+    .first-section {
+        height: 70vh
+    }
+    
+    .first-section-bg-image {
+        height: 70vh;
     }
 }
