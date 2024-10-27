@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if ( ( !isset($_SESSION['logged-in'])) && ($_SESSION['logged-in']==false) ){
+		header('Location: index.php');
+    exit();
+	}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -16,42 +23,39 @@
   <!--  Navbar -->
   <header>
     <nav class="navbar navbar-expand-lg bg-light border-bottom">
-      <div class=" container-fluid">
-      <a class="navbar-brand" href="./index.html">Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
-        <div id="nav-line-1"></div>
-        <div id="nav-line-2"></div>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="./login.html">Sign In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./register.html">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./expenses.html">Expenses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./balance.html">Balance</a>
-          </li>
-        </ul>
-      </div>
+      <div class="container-fluid">
+        <a class="navbar-brand ps-4 py-2" href="./index.php">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
+          <div id="nav-line-1"></div>
+          <div id="nav-line-2"></div>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link ps-4 py-2" href="./expenses.php">Expenses</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link ps-4 py-2" href="./balance.php">Balance</a>
+                </li>
+              </ul>
+              <button type="button" class="btn px-4 py-2" id="btn-log-out">
+                <a class="nav-link" id="log-out" href="./logout.php">Logout</a>
+              </button>
+        </div>
       </div>
     </nav>
   </header>
 
   <main>
     <!--  First section-->
-    <section class="first-section">
-      <div class="first-section-bg-image">
+    <section class="main-section">
+      <div class="main-section-bg-image">
         <div class="d-flex flex-column justify-content-center height-100">
           <div id="header" class="px-5 py-4 ">
             <h1 class="pb-4">Control your expenses!</h1>
             <p class="lead">Start tracking your budget and control your financial flow with great balance!</p>
-            <a type="button" class="btn btn-lg btn-outline-success" href="./register.html">Create your account today!</a>
+            <a type="button" class="btn btn-lg btn-outline-success" href="./register.php">Create your account today!</a>
           </div>
         </div>
     </section>
@@ -128,6 +132,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="index.js"></script>
 
-</body>
+<?php
+	if(isset($_SESSION['Error']))	echo $_SESSION['Error'];
+?>
 
+</body>
 </html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <title>Budget Tracking Application</title>
+</head>
+
+<body>
+  <!--  Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-light border-bottom">
+      <div class=" container-fluid">
+      <a class="navbar-brand" href="./index.php">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
+        <div id="nav-line-1"></div>
+        <div id="nav-line-2"></div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./login.php">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./register.php">Register</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!--  First section-->
+    <section class="p-5">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <h1>Website Terms and Conditions</h1>
+          <ol>
+            <li>
+              <p>Acceptance of Terms By accessing or using this website (Budget Tracking Application), you agree to comply with and be bound by these Terms and Conditions. If you do not agree with these Terms, please discontinue use of this Site.</p>
+            </li>
+            <li>
+              <p>Use of Site You may use the Site for lawful, personal, and non-commercial purposes. You agree not to use the Site for any unlawful or prohibited activities, including but not limited to:</p>
+              <ul>
+                <li>
+                  <p>Attempting to gain unauthorized access to the Site or any related systems.</p>
+                </li>
+                <li>
+                  <p>Interfering with the proper functioning of the Site.</p>
+                </li>
+                <li>
+                  <p>Engaging in any activity that could damage or disrupt the Site or its servers.</p>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>Intellectual Property All content on the Site, including text, graphics, logos, images, and software, is the property of Budget Tracking Application and is protected by applicable copyright, trademark, and other intellectual property laws. Unauthorized use of the content is prohibited without written consent.</p>
+            </li>
+            <li>
+              <p>Termination We reserve the right to terminate or restrict your access to the Site, without notice or liability, for any reason, including a breach of these Terms.</p>
+            </li>
+          </ol>
+        </div>
+    </div>
+    </section>
+  </main>
+
+  <!--  Footer-->
+  <footer class="bg-light py-3 border">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="./about.html" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="./contact.html" class="nav-link px-2 text-body-secondary">Contact</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">Copyright 2024 © Budget Tracking Application.</p>
+  </footer>
+
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>
+
+<?php
+	if(isset($_SESSION['Error']))	echo $_SESSION['Error'];
+?>
+
+</body>
+</html>

@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if ( ( !isset($_SESSION['logged-in'])) && ($_SESSION['logged-in']==false) ){
+		header('Location: index.php');
+    exit();
+	}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -18,23 +25,26 @@
   <!--  Navbar -->
   <header>
     <nav class="navbar navbar-expand-lg bg-light border-bottom">
-      <div class=" container-fluid">
-      <a class="navbar-brand" href="./index.html">Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
-        <div id="nav-line-1"></div>
-        <div id="nav-line-2"></div>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="./expenses.html">Expenses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./balance.html">Balance</a>
-          </li>
-        </ul>
-      </div>
+      <div class="container-fluid">
+        <a class="navbar-brand ps-4 py-2" href="./index.php">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="buttonAnimation()">
+          <div id="nav-line-1"></div>
+          <div id="nav-line-2"></div>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link ps-4 py-2" href="./expenses.php">Expenses</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link ps-4 py-2" href="./balance.php">Balance</a>
+                </li>
+              </ul>
+              <button type="button" class="btn px-4 py-2" id="btn-log-out">
+                <a class="nav-link" id="log-out" href="./logout.php">Logout</a>
+              </button>
+        </div>
       </div>
     </nav>
   </header>
