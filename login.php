@@ -12,12 +12,12 @@
     $_SESSION['temporaryPassword'] = $_POST['password'];
 
     
-    $secretCode = "6LdoznAcAAAAAJbNVksSBl9RQNb-HE_QTzwlCIWN";
+    /*$secretCode = "";
     $reCaptchaVerficication = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretCode.'&response='.$_POST['g-recaptcha-response']);
     $captchaRespond = json_decode($reCaptchaVerficication);
     if ( !($captchaRespond->success) ){
       $_SESSION['loginError'] = "Check reCAPTCHA!";
-    } else {
+    } else {*/
       require_once "connect.php";
       mysqli_report(MYSQLI_REPORT_OFF);
       try {
@@ -25,6 +25,7 @@
         if ($connection->connect_errno!=0) {
           throw new Exception(mysqli_connect_errno());
         } else {
+          
           $email = $_POST['email'];
           $password = $_POST['password'];
           $email = htmlentities($email, ENT_QUOTES, "UTF-8");
@@ -38,11 +39,10 @@
           if($fetchUsers!=0){
             $fetchFromDatabase = $result->fetch_assoc();
             if (password_verify($password, $fetchFromDatabase['password'])){
-              $_SESSION['logged-in'] = true;			
-              $_SESSION['userid'] = $fetchFromDatabase['userid'];
+              $_SESSION['logged-in'] = true;
+              $_SESSION['userid'] = $fetchFromDatabase['id'];
               $_SESSION['email'] = $fetchFromDatabase['email'];
-              $_SESSION['name'] = $fetchFromDatabase['name'];
-              $_SESSION['surname'] = $fetchFromDatabase['surname'];
+              $_SESSION['userName'] = $fetchFromDatabase['username'];
               unset($_SESSION['loginError']);
               unset($_SESSION['temporaryEmail']);
               unset($_SESSION['temporaryPassword']);
@@ -59,7 +59,7 @@
         $_SESSION['loginError'] = "Server is not responding! Please try again later.";
       }
       $connection->close();
-    }
+    //}
   }
 ?>
 
@@ -139,7 +139,7 @@
                   </span>
                 </div>
               </div>
-              <div class="g-recaptcha d-flex justify-content-center mb-3" data-sitekey="6LdoznAcAAAAAI8J_grRXmxNHdJ6S23Ex049Oyx0"></div>
+              <!--<div class="g-recaptcha d-flex justify-content-center mb-3" data-sitekey=""></div>-->
               <button class="w-100 mb-4 btn btn-lg rounded btn-primary" type="submit">Sign In</button>
               <div class="d-flex justify-content-end mb-4 ">
                   <a href="#!">Forgot password?</a>

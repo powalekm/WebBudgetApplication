@@ -6,7 +6,7 @@
   }
 
   if ( isset($_POST['operationName']) && isset($_POST['operationValue']) 
-    && isset($_POST['operationCategory']) && isset($_POST['paymentMethod']) && isset($_POST['operationDate']) )	{
+    && isset($_POST['operationCategory']) && isset($_POST['operationDate']) )	{
     $operationVerification = true;
 
     //operationValue verification
@@ -15,7 +15,7 @@
       $operationVerification = false;
       $_SESSION['operationError'] = "The value cannot be 0 or lower!";
     }
-    
+
     //name verification
     $operationName = htmlentities($_POST['operationName'], ENT_QUOTES, "UTF-8");
     if ( (strlen($operationName) < 3) || (strlen($operationName) > 20) ){
@@ -26,12 +26,10 @@
     $_SESSION['temporaryOperationName'] = $_POST['operationName'];
     $_SESSION['temporaryOperationValue'] = $_POST['operationValue'];
     $_SESSION['temporaryOperationCategory'] = $_POST['operationCategory'];
-    $_SESSION['temporaryPaymentMethod'] = $_POST['paymentMethod'];
     $_SESSION['temporaryOperationDate'] = $_POST['operationDate'];
 
     if ($operationVerification == true) {
       $operationCategory = $_POST['operationCategory'];
-      $paymentMethod = $_POST['paymentMethod'];
       $operationDate = $_POST['operationDate'];
 
       require_once "connect.php";
@@ -42,13 +40,12 @@
           throw new Exception(mysqli_connect_errno());
         } else {
           $userid = $_SESSION['userid'];
-          if( $connection->query("INSERT INTO expenses VALUES (NULL, '$userid', '$operationCategory', $paymentMethod, '$operationValue', '$operationDate', '$operationName')")) {
+          if( $connection->query("INSERT INTO incomes VALUES (NULL, '$userid', '$operationCategory', '$operationValue', '$operationDate', '$operationName')")) {
             unset($_SESSION['temporaryOperationName']);
             unset($_SESSION['temporaryOperationValue']);
             unset($_SESSION['temporaryOperationCategory']);
-            unset($_SESSION['temporaryPaymentMethod']);
             unset($_SESSION['temporaryOperationDate']);
-            $_SESSION['operationCorrect'] = "The expense added correctly!";
+            $_SESSION['operationCorrect'] = "The income added correctly!";
           }
         }
       } catch (Exception $error){
@@ -66,6 +63,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <!-- CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -120,16 +118,16 @@
       <div class="row justify-content-center align-items-start px-sm-5">
         <div class="col-lg-6 p-3">
           <form method="POST">
-            <h2 class="p-2">Add expense</h2>
+            <h2 class="p-2">Add income</h2>
             <!-- Expense Name -->
             <div class="form-floating mb-3">
-              <input type="text" name="operationName" class="form-control rounded-3" id="floatingName" placeholder="Name of expense" value="<?php
+              <input type="text" name="operationName" class="form-control rounded-3" id="floatingName" placeholder="Name of income" value="<?php
                 if (isset($_SESSION['temporaryOperationName'])){
                   echo $_SESSION['temporaryOperationName'];
                   unset($_SESSION['temporaryOperationName']);
                 }
                 ?>">
-              <label for="floatingName">Name of expense</label>
+              <label for="floatingName">Name of income</label>
             </div>
             <!-- Expense Value -->
             <div class="form-floating mb-3">
@@ -141,9 +139,9 @@
                 ?>">
               <label for="floatingValue">Value</label>
             </div>
-            <!-- Expense Type -->
+            <!-- Income Type -->
             <div class="form-floating mb-3">
-              <select class="form-control" name="operationCategory" id="floatingTypeExpense">
+              <select class="form-control" name="operationCategory" id="floatingoOperationCategory">
                  <?php
                     require_once "connect.php";
                     mysqli_report(MYSQLI_REPORT_OFF);
@@ -153,7 +151,7 @@
                         throw new Exception(mysqli_connect_errno());
                       } else {
                         $userid = $_SESSION['userid'];
-                        $result = @$connection->query("SELECT * FROM expenses_category_assigned_to_users WHERE user_id='$userid'");
+                        $result = @$connection->query("SELECT * FROM incomes_category_assigned_to_users WHERE user_id='$userid'");
                         if (!$result) {
                           throw new Exception($connection->error);
                         }
@@ -173,41 +171,7 @@
                     $connection->close();
                   ?>
               </select>
-              <label for="floatingTypeExpense">Type of expense</label>
-            </div>
-            <!-- Payment type -->
-            <div class="form-floating mb-3">
-              <select class="form-control" name="paymentMethod" id="floatingPaymentMethod">
-                 <?php
-                    require_once "connect.php";
-                    mysqli_report(MYSQLI_REPORT_OFF);
-                    try {
-                      $connection = new mysqli($host, $db_user, $db_password, $db_name);
-                      if ($connection->connect_errno!=0) {
-                        throw new Exception(mysqli_connect_errno());
-                      } else {
-                        $userid = $_SESSION['userid'];
-                        $result = @$connection->query("SELECT * FROM payment_methods_assigned_to_users WHERE user_id='$userid'");
-                        if (!$result) {
-                          throw new Exception($connection->error);
-                        }
-                        while($row = mysqli_fetch_array($result))  {
-                          if (isset($_SESSION['temporaryPaymentMethod']) && ($row['id'] == $_SESSION['temporaryPaymentMethod']) ){
-                            echo "<option selected value=".$row['id'].">".$row['name']."</option>";
-                            unset($_SESSION['temporaryPaymentMethod']);
-                          } else {
-                            echo "<option value=".$row['id'].">".$row['name']."</option>";
-                          }
-                        }
-                        $result->free_result();
-                      } 
-                    } catch (Exception $error){
-                      $_SESSION['categoryError'] = "Server is not responding! Please try again later.";
-                    }
-                    $connection->close();
-                  ?>
-              </select>
-              <label for="floatingPaymentMethod">Payment type</label>
+              <label for="floatingoOperationCategory">Type of income</label>
             </div>
             <!-- Category Error -->
             <div class="text-center">
@@ -274,7 +238,6 @@
     <p class="text-center text-body-secondary">Copyright 2024 © Budget Tracking Application.</p>
   </footer>
 
-
   <!-- JavaScript -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -284,7 +247,6 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="index.js"></script>
-
 </body>
 
 </html>
