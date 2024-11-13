@@ -1,12 +1,11 @@
-var xValues = ["Food", "Transport", "Others", "Rental", "Relax"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 new Chart("myChart", {
   type: "pie",
@@ -20,18 +19,16 @@ new Chart("myChart", {
   options: {
     title: {
       display: true,
-      text: "Summary in total: 1200zł"
+      text: "Expense Categories:"
     }
   }
 });
 
 function buttonAnimation() {
     if( $("#navbarNav").hasClass("animation") ) {
-
         $("#navbarNav").removeClass("animation");
         $("#nav-line-1").removeClass("animation-left");
         $("#nav-line-2").removeClass("animation-right");
-
     } else {
         $("#navbarNav").addClass("animation");
         $("#nav-line-1").addClass("animation-left");
@@ -54,3 +51,28 @@ function buttonAnimation() {
       hide_eye.style.display = "none";
     }
   }
+
+  var periodSelectorChange = function(selection) {
+    $('#floatingDatePeriod').val(selection);
+};
+
+function dateFilter() {
+  var currentDate = new Date();
+  var firstDayOfMonth, lastDayofMonth;
+
+  if ($("#floatingDatePeriod").val() == 1){
+    firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 2);
+    $("#floatingStartDate").attr('value', firstDayOfMonth.toISOString().substring(0,10));
+    $("#floatingEndDate").attr('value',  currentDate.toISOString().substring(0,10));
+  } else if ($("#floatingDatePeriod").val() == 2){
+    firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 2);
+    lastDayofMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    $("#floatingStartDate").attr('value', firstDayOfMonth.toISOString().substring(0,10));
+    $("#floatingEndDate").attr('value',  lastDayofMonth.toISOString().substring(0,10));
+  } else if ($("#floatingDatePeriod").val() == 3){
+    firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 2);
+    $("#floatingStartDate").attr('value', firstDayOfMonth.toISOString().substring(0,10));
+    $("#floatingEndDate").attr('value',  currentDate.toISOString().substring(0,10));
+  } 
+}
+

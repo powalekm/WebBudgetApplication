@@ -6,27 +6,17 @@
 		exit();
 	}
 
-  if ( isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) && isset($_POST['password']) )	{
+  if ( isset($_POST['userName']) && isset($_POST['email']) && isset($_POST['password']) )	{
 		$registrationVerification = true;
 
-    $name = $_POST['name'];
-    if ( (strlen($name) < 3) || (strlen($name) > 20) ){
+    $userName = $_POST['userName'];
+    if ( (strlen($userName) < 3) || (strlen($userName) > 20) ){
       $registrationVerification = false;
-      $_SESSION['registrationError'] = "Name cannot be shorter than 3 characters and longer than 20!";
+      $_SESSION['registrationError'] = "User name cannot be shorter than 3 characters and longer than 20!";
     }
-    else if (!ctype_alnum($name)) {
+    else if (!ctype_alnum($userName)) {
       $registrationVerification = false;
-      $_SESSION['registrationError'] = "Name contain incorrect characters!";
-    }
-
-    $surname = $_POST['surname'];
-    if ( (strlen($surname) < 3) || (strlen($surname) > 20) ){
-      $registrationVerification = false;
-      $_SESSION['registrationError'] = "Surname cannot be shorter than 3 characters and longer than 20!";
-    }
-    else if (!ctype_alnum($surname)) {
-      $registrationVerification = false;
-      $_SESSION['registrationError'] = "Surname contain incorrect characters!";
+      $_SESSION['registrationError'] = "User name contain incorrect characters!";
     }
 
     $email = $_POST['email'];
@@ -49,16 +39,15 @@
       $_SESSION['registrationError'] = "Accept the Terms of service is required!";
     }
     
-    $secretCode = "6LdoznAcAAAAAJbNVksSBl9RQNb-HE_QTzwlCIWN";
+    /*$secretCode = "";
     $reCaptchaVerficication = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretCode.'&response='.$_POST['g-recaptcha-response']);
     $captchaRespond = json_decode($reCaptchaVerficication);
     if ( !($captchaRespond->success) ){
       $registrationVerification = false;
       $_SESSION['registrationError'] = "Check reCAPTCHA!";
-     }
+     }*/
 
-    $_SESSION['temporaryName'] = $name;
-    $_SESSION['temporarySurname'] = $surname;
+    $_SESSION['temporaryUserName'] = $userName;
     $_SESSION['temporaryEmail'] = $email;
     $_SESSION['temporaryPassword'] = $password;
     if (isset($_POST['terms-of-service'])){
@@ -73,32 +62,44 @@
         if ($connection->connect_errno!=0) {
           throw new Exception(mysqli_connect_errno());
         } else {
-          $result = @$connection->query("SELECT userid FROM users WHERE email='$email'");
+
+          $result = @$connection->query("SELECT id FROM users WHERE email='$email' OR username='$userName'");
           if (!$result) {
             throw new Exception($connection->error);
           }
           $fetchUsers = $result->num_rows;
           if($fetchUsers!=0){
             $registrationVerification = false;
-            $_SESSION['registrationError'] ="Account for this email already exists!";
+            $_SESSION['registrationError'] ="Account for this User Name or Email already exists!";
           }
         }
       } catch (Exception $error){
         $registrationVerification = false;
         $_SESSION['registrationError'] = "Server is not responding! Please try again later.";
-        echo "<br/> Dev comment: ".$error;
       }
       if ($registrationVerification == true){
-        if( $connection->query("INSERT INTO users VALUES (NULL, '$email', '$passwordHashed', '$name','$surname')")) {
-          unset($_SESSION['temporaryName']);
-          unset($_SESSION['temporarySurname']);
-          unset($_SESSION['temporaryEmail']);
-          unset($_SESSION['temporaryPassword']);
-          unset($_SESSION['temporaryTermsOfService']);
-          $_SESSION['registrationCorrect'] = "The Account has been created correctly!";
+        if( $connection->query("INSERT INTO users VALUES (NULL, '$userName', '$passwordHashed', '$email')")) {
+          $result = $connection->query("SELECT id FROM users WHERE email='$email'");
+          if (!$result) {
+            throw new Exception($connection->error);
+          } else {
+            $fetchFromDatabase = $result->fetch_assoc();
+            $userid = $fetchFromDatabase['id'];
+          }
+          if ( $connection->query("INSERT INTO expenses_category_assigned_to_users (id, user_id, name) SELECT NULL, '$userid', name FROM expenses_category_default") && 
+               $connection->query("INSERT INTO incomes_category_assigned_to_users (id, user_id, name) SELECT NULL, '$userid', name FROM incomes_category_default") && 
+               $connection->query("INSERT INTO payment_methods_assigned_to_users (id, user_id, name) SELECT NULL, '$userid', name FROM payment_methods_default")) {
+            unset($_SESSION['temporaryUserName']);
+            unset($_SESSION['temporaryEmail']);
+            unset($_SESSION['temporaryPassword']);
+            unset($_SESSION['temporaryTermsOfService']);
+            $_SESSION['registrationCorrect'] = "The Account has been created correctly!";
+          } else {
+            throw new Exception($connection->error);
+          }
         } else {
           throw new Exception($connection->error);
-        }
+        }       
       }
       $connection->close();
     }
@@ -154,22 +155,13 @@
         <form method="POST">
             <h2 class="p-2">Registration Form</h2>
             <div class="form-floating mb-3">
-              <input type="text" name="name" class="form-control rounded-3" id="floatingName" placeholder="Name" value="<?php
-                if (isset($_SESSION['temporaryName'])){
-                  echo $_SESSION['temporaryName'];
-                  unset($_SESSION['temporaryName']);
+              <input type="text" name="userName" class="form-control rounded-3" id="floatingName" placeholder="Name" value="<?php
+                if (isset($_SESSION['temporaryUserName'])){
+                  echo $_SESSION['temporaryUserName'];
+                  unset($_SESSION['temporaryUserName']);
                 }
                 ?>">
-              <label for="floatingName">Name</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="text" name="surname" class="form-control rounded-3" id="floatingSurname" placeholder="Surname" value="<?php
-                  if (isset($_SESSION['temporarySurname'])){
-                    echo $_SESSION['temporarySurname'];
-                    unset($_SESSION['temporarySurname']);
-                  }
-                ?>">
-              <label for="floatingSurname">Surname</label>
+              <label for="floatingName">User Name</label>
             </div>
             <div class="form-floating mb-3">
               <input type="email" name="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" value="<?php
@@ -197,7 +189,7 @@
                 </span>
               </div>
             </div>
-            <div class="g-recaptcha d-flex justify-content-center mb-3" data-sitekey="6LdoznAcAAAAAI8J_grRXmxNHdJ6S23Ex049Oyx0"></div>
+            <!--<div class="g-recaptcha d-flex justify-content-center mb-3" data-sitekey=""></div>-->
             <div class="form-check d-flex justify-content-center mb-4">
               <input class="form-check-input me-2" type="checkbox" name="terms-of-service" id="checkbox" <?php 
                 if (isset($_SESSION['temporaryTermsOfService'])){
